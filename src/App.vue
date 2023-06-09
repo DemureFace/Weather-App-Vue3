@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col min-h-screen font-Roboto bg-weather-primary">
     <SiteNavigation />
+    <Transition name="page" mode="out-in">
+      <Loader v-if="showLoading" />
+    </Transition>
     <RouterView v-slot="{ Component }">
       <Transition name="page" mode="out-in">
         <component :is="Component" />
@@ -10,8 +13,14 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
 import { RouterView } from "vue-router";
+import Loader from "@/components/base/BaseLoader.vue";
 import SiteNavigation from "./components/SiteNavigation.vue";
+
+const store = useStore();
+const showLoading = computed(() => store.state.showLoading);
 </script>
 
 <style>

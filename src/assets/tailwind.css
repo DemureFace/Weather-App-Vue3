@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input {
+  border: none;
+  border-bottom: 2px solid #004760;
+  outline: none;
+  font-size: 1em;
+  background: transparent;
+  color: #004760;
+  font-weight: 600;
+  padding: 10px 35px 5px 5px;
+}
+
+#checkbox {
+  cursor: pointer;
+  accent-color: #00668a;
+  margin-right: 3px;
+}
+
+label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00668a;
+}
+
+.label-anim {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.5s;
+}
+.labelError {
+  top: 35%;
+}
+
+.focused {
+  top: -5px;
+}
+.icon-input {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  color: #004760;
+}
