@@ -79,6 +79,7 @@ export default {
 
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       errors: [],
@@ -103,7 +104,11 @@ export default {
     }),
 
     async onSignup() {
-      let validations = new SignupValidations(this.email, this.password);
+      let validations = new SignupValidations(
+        this.username,
+        this.email,
+        this.password
+      );
 
       this.errors = validations.checkValidations();
       if ("email" in this.errors || "password" in this.errors) {
@@ -113,6 +118,7 @@ export default {
       this.showLoading(true);
 
       await this.signup({
+        username: this.username,
         email: this.email,
         password: this.password,
       }).catch((error) => {
