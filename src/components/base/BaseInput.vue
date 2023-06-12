@@ -14,15 +14,19 @@ defineProps({
   },
   id: {
     type: String,
-    reqiered: true,
+    required: true,
   },
   label: {
     type: String,
     default: "",
   },
+  placeholder: {
+    type: String,
+    default: "",
+  },
   type: {
     type: String,
-    reqiered: true,
+    required: true,
   },
   error: {
     type: String,
@@ -35,21 +39,26 @@ defineEmits(["update:inputValue"]);
 
 <template>
   <div class="flex flex-col relative mt-10">
-    <span class="icon-input">
+    <span v-if="icon" class="icon-input">
       <i class="fa-solid" :class="icon" />
     </span>
     <input
       :v-model="inputValue"
       :type="type"
       :id="id"
+      :placeholder="placeholder"
       @focus="isFocused = true"
       @blur="isFocused = false"
       @input="$emit('update:inputValue', $event.target.value)"
     />
     <label
+      v-if="label"
       :for="id"
       class="label-anim"
-      :class="{ focused: isFocused || inputValue, labelError: error }"
+      :class="{
+        focused: isFocused || inputValue,
+        labelError: error,
+      }"
       >{{ label }}</label
     >
     <span v-if="error" class="">{{ error }}</span>
