@@ -12,12 +12,12 @@
 
       <div class="flex gap-3 flex-1 justify-end">
         <i
-          class="fa-solid fa-id-card text-xl hover:text-weather-secondary duration-150 cursor-pointer"
-          @click="toggleLoginModal"
+          class="fa-solid fa-right-to-bracket text-xl hover:text-weather-secondary hover:bg-white rounded-full duration-150 cursor-pointer"
+          @click="toggleModal('login')"
         ></i>
         <i
           class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
-          @click="toggleModal"
+          @click="toggleModal('info')"
         ></i>
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
@@ -26,65 +26,27 @@
         ></i>
       </div>
 
-      <BaseModal
-        :modalActive="loginModalActive"
-        @close-modal="toggleLoginModal"
-      >
-        <div class="w-80">
-          <Login :openRegistrationModal="openRegistrationModal" />
-        </div>
-      </BaseModal>
-
-      <BaseModal
-        :modalActive="registrationModalActive"
-        @close-modal="toggleRegistrationModal"
-      >
-        <div class="w-80">
-          <SignUp :openRegistrationModal="openRegistrationModal" />
-        </div>
-      </BaseModal>
-
       <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
-        <div class="text-black">
-          <h1 class="text-2xl mb-1">About:</h1>
-          <p class="mb-4">
-            The Local Weather allows you to track the current and future weather
-            of cities of your choosing.
-          </p>
-          <h2 class="text-2xl">How it works:</h2>
-          <ol class="list-decimal list-inside mb-4">
-            <li>
-              Search for your city by entering the name into the search bar.
-            </li>
-            <li>
-              Select a city within the results, this will take you to the
-              current weather for your selection.
-            </li>
-            <li>
-              Track the city by clicking on the "+" icon in the top right. This
-              will save the city to view at a later time on the home page.
-            </li>
-          </ol>
-
-          <h2 class="text-2xl">Removing a city</h2>
-          <p>
-            If you no longer wish to track a city, simply select the city within
-            the home page. At the bottom of the page, there will be am option to
-            delete the city.
-          </p>
-        </div>
+        <component
+          :is="modalComponent"
+          @change-modal="currentModalComponent = $event"
+        />
       </BaseModal>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { uid } from "uid";
+import { ref, computed } from "vue";
+
 import { RouterLink, useRoute, useRouter } from "vue-router";
+
+import { uid } from "uid";
+
 import BaseModal from "@/components/base/BaseModal.vue";
 import Login from "@/components/Login.vue";
 import SignUp from "@/components/SignUp.vue";
+import InfoModal from "@/components/InfoModal.vue";
 
 const savedCities = ref([]);
 const route = useRoute();
@@ -113,24 +75,24 @@ const addCity = () => {
   router.replace({ query });
 };
 
+const currentModalComponent = ref(null);
 const modalActive = ref(null);
-const registrationModalActive = ref(false);
-const loginModalActive = ref(false);
 
-const toggleModal = () => {
+const modalComponent = computed(() => {
+  switch (currentModalComponent.value) {
+    case "login":
+      return Login;
+    case "info":
+      return InfoModal;
+    case "signup":
+      return SignUp;
+    default:
+      return null;
+  }
+});
+
+const toggleModal = (component) => {
   modalActive.value = !modalActive.value;
-};
-
-const toggleLoginModal = () => {
-  loginModalActive.value = !loginModalActive.value;
-};
-
-const toggleRegistrationModal = () => {
-  registrationModalActive.value = !registrationModalActive.value;
-};
-
-const openRegistrationModal = () => {
-  loginModalActive.value = !loginModalActive.value;
-  registrationModalActive.value = !registrationModalActive.value;
+  currentModalComponent.value = component;
 };
 </script>

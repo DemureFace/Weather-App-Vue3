@@ -1,19 +1,13 @@
 import Validations from "./Validations";
 
 export default class SignupValidations {
-  constructor(username, email, password) {
-    this.username = username;
+  constructor(email, password) {
     this.email = email;
     this.password = password;
   }
 
   checkValidations() {
     let errors = [];
-
-    //username Validation
-    if (!Validations.minLength(this.username, 8)) {
-      errors["username"] = "username should be of 8 characters";
-    }
 
     // Email Validations
     if (!Validations.checkEmail(this.email)) {

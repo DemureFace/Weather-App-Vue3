@@ -44,7 +44,7 @@
           <a
             href="#"
             class="text-weather-secondary underline hover:no-underline"
-            @click="Register"
+            @click="$emit('change-modal', 'signup')"
           >
             Register
           </a>
@@ -78,13 +78,6 @@ export default {
     };
   },
 
-  props: {
-    openRegistrationModal: {
-      type: Function,
-      required: true,
-    },
-  },
-
   methods: {
     ...mapActions("auth", {
       login: LOGIN_ACTION,
@@ -114,10 +107,6 @@ export default {
       }
       this.showLoading(false);
       this.$router.push("/posts");
-    },
-
-    Register() {
-      this.openRegistrationModal();
     },
   },
 };

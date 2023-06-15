@@ -41,7 +41,6 @@ export default {
 
   async [SIGNUP_ACTION](context, payload) {
     let postData = {
-      username: payload.username,
       email: payload.email,
       password: payload.password,
       returnSecureToken: true,
@@ -68,7 +67,6 @@ export default {
 
     if (response.status === 200) {
       context.commit(SET_USER_TOKEN_DATA_MUTATION, {
-        username: response.data.username,
         email: response.data.email,
         token: response.data.idToken,
         expiresIn: response.data.expiresIn,

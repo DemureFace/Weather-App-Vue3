@@ -52,7 +52,7 @@
           <a
             href="#"
             class="text-weather-secondary underline hover:no-underline"
-            @click="Login"
+            @click="$emit('change-modal', 'login')"
           >
             Login
           </a>
@@ -126,10 +126,6 @@ export default {
         this.showLoading(false);
       });
       this.showLoading(false);
-    },
-
-    Login() {
-      this.openRegistrationModal();
     },
   },
 };
