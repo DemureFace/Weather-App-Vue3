@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-80">
     <h3 class="text-3xl font-bold text-center text-weather-primary">Login</h3>
     <div v-if="error" class="error bg-red-500">{{ error }}</div>
     <form class="box-border" @submit.prevent="onLogin()">
@@ -25,29 +25,20 @@
           <input type="checkbox" id="checkbox" />
           Remember me
         </label>
-        <a
-          href="#"
-          class="font-semibold text-weather-primary no-underline hover:underline"
-          >Forgot Password?</a
-        >
+        <BaseButton tag="a" class="font-semibold">Forgot Password?</BaseButton>
       </div>
 
-      <button
-        class="w-full p-3 mt-4 rounded-md bg-weather-primary hover:bg-weather-secondary text-white font-semibold text-xl hover:shadow-xl transition-all duration-300 ease-in-out"
-        type="submit"
-      >
+      <BaseButton class="w-full p-3 mt-4 font-semibold text-xl">
         Login
-      </button>
+      </BaseButton>
+
       <div class="mt-4 text-center">
         <p class="font-medium text-weather-primary">
           Don't have an account?
-          <a
-            href="#"
-            class="text-weather-secondary underline hover:no-underline"
-            @click="$emit('change-modal', 'signup')"
-          >
+
+          <BaseButton tag="a" @click="$emit('change-modal', 'signup')">
             Register
-          </a>
+          </BaseButton>
         </p>
       </div>
     </form>
@@ -58,6 +49,7 @@
 import { mapActions, mapMutations } from "vuex";
 import SignupValidations from "@/services/SignupValidations";
 import BaseInput from "@/components/base/BaseInput.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 import {
   LOADING_SPINNER_SHOW_MUTATION,
   LOGIN_ACTION,
@@ -66,6 +58,7 @@ import {
 export default {
   components: {
     BaseInput,
+    BaseButton,
     SignupValidations,
   },
 

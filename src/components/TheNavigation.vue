@@ -3,16 +3,16 @@
     <nav
       class="container flex flex-col sm:flex-row items-center gap-4 text-white py-6"
     >
-      <RouterLink :to="{ name: 'home' }">
+      <BaseButton tag="router-link" path="home">
         <div class="flex items-center gap-3">
           <i class="fa-solid fa-sun text-2xl"></i>
           <p class="text-2xl">The Local Weather</p>
         </div>
-      </RouterLink>
+      </BaseButton>
 
       <div class="flex gap-3 flex-1 justify-end">
         <i
-          class="fa-solid fa-right-to-bracket text-xl hover:text-weather-secondary hover:bg-white rounded-full duration-150 cursor-pointer"
+          class="fa-solid fa-right-to-bracket text-xl hover:text-weather-secondary duration-150 cursor-pointer"
           @click="toggleModal('login')"
         ></i>
         <i
@@ -28,6 +28,7 @@
 
       <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
         <component
+          tag="a"
           :is="modalComponent"
           @change-modal="currentModalComponent = $event"
         />
@@ -44,6 +45,7 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import { uid } from "uid";
 
 import BaseModal from "@/components/base/BaseModal.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 import Login from "@/components/Login.vue";
 import SignUp from "@/components/SignUp.vue";
 import InfoModal from "@/components/InfoModal.vue";

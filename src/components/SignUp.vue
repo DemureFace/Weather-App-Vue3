@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-80">
     <h3 class="text-3xl font-bold text-center text-weather-primary">
       Registration
     </h3>
@@ -35,27 +35,24 @@
       <div class="flex justify-between mt-4">
         <label class="text-base">
           <input type="checkbox" id="checkbox" />
-          I agree to the terms & conditions
+          I agree to the
+          <BaseButton tag="a" class="font-semibold">
+            terms & conditions
+          </BaseButton>
         </label>
       </div>
 
-      <button
-        type="submit"
-        class="w-full p-3 mt-4 rounded-md bg-weather-primary hover:bg-weather-secondary text-white font-semibold text-xl hover:shadow-xl transition-all duration-300 ease-in-out"
-      >
+      <BaseButton class="w-full p-3 mt-4 font-semibold text-xl">
         Register
-      </button>
+      </BaseButton>
 
       <div class="mt-4 text-center">
         <p class="font-medium text-weather-primary">
           Already have an account?
-          <a
-            href="#"
-            class="text-weather-secondary underline hover:no-underline"
-            @click="$emit('change-modal', 'login')"
-          >
+
+          <BaseButton tag="a" class="" @click="$emit('change-modal', 'login')">
             Login
-          </a>
+          </BaseButton>
         </p>
       </div>
     </form>
@@ -63,9 +60,11 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
 import SignupValidations from "@/services/SignupValidations";
 import BaseInput from "@/components/base/BaseInput.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
+
+import { mapActions, mapMutations } from "vuex";
 import {
   SIGNUP_ACTION,
   LOADING_SPINNER_SHOW_MUTATION,
@@ -74,6 +73,7 @@ import {
 export default {
   components: {
     BaseInput,
+    BaseButton,
     SignupValidations,
   },
 

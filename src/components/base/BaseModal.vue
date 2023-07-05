@@ -11,12 +11,10 @@
             class="p-10 bg-white bg-opacity-90 backdrop-blur shadow-xl self-start rounded-2xl border-4 border-white mt-32"
           >
             <slot />
-            <button
-              class="text-white font-medium hover:text-weather-primary mt-8 bg-weather-primary hover:bg-transparent py-2 px-6 rounded border-2 hover:border-weather-primary hover:shadow-xl transition-all duration-300 ease-in-out"
-              @click="$emit('close-modal')"
-            >
+
+            <BaseButton class="py-2 px-6 mt-4" @click="$emit('close-modal')">
               Close
-            </button>
+            </BaseButton>
           </div>
         </Transition>
       </div>
@@ -25,6 +23,8 @@
 </template>
 
 <script setup>
+import BaseButton from "./BaseButton.vue";
+
 defineEmits(["close-modal"]);
 defineProps({
   modalActive: {

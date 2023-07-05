@@ -24,7 +24,7 @@ const router = createRouter({
       name: "signUp",
       component: () => import("@/components/SignUp.vue"),
       meta: {
-        title: "Login",
+        title: "SignUp",
       },
     },
     {
